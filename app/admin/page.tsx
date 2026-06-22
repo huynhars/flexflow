@@ -68,7 +68,7 @@ export default function Dashboard() {
           { title: "Active", value: data.activeMembers, icon: <TrophyOutlined />, color: "#4ade80" },
           { title: "Trainers", value: data.totalTrainers, icon: <TeamOutlined />, color: "#60a5fa" },
           { title: "Bookings", value: data.totalBookings, icon: <CalendarOutlined />, color: "#f97316" },
-          
+
         ].map(item => (
           <Col key={item.title} xs={12} sm={8} md={8} lg={4} xl={4}>
             <Card style={cardStyle} styles={{ body: { padding: 16 } }}>
@@ -86,10 +86,10 @@ export default function Dashboard() {
       {/* REVENUE ROW */}
       <Row gutter={[16, 16]}>
         {[
-          { label: "Tổng Doanh Thu", value: data.totalRevenue, color: "#facc15" },
-          { label: "Doanh Thu Booking", value: data.totalBookingRevenue, color: "#4ade80" },
-          { label: "Doanh Thu Shop", value: data.totalOrderRevenue, color: "#60a5fa" },
-         
+          { label: "Tổng Doanh Thu", value: data.totalRevenue, color: "#facc15", isCount: false },
+          { label: "Doanh Thu Booking", value: data.totalBookingRevenue, color: "#4ade80", isCount: false },
+          { label: "Doanh Thu Shop", value: data.totalOrderRevenue, color: "#60a5fa", isCount: false },
+
         ].map(item => (
           <Col key={item.label} xs={24} sm={12} md={6}>
             <Card style={cardStyle} styles={{ body: { padding: 20 } }}>
@@ -136,8 +136,13 @@ export default function Dashboard() {
                 <XAxis dataKey="month" stroke="#999" />
                 <YAxis stroke="#999" tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
                 <Tooltip
-                  formatter={(value: number) => [`${value.toLocaleString("vi-VN")}đ`]}
-                  contentStyle={{ backgroundColor: "#111", border: "1px solid #facc15" }}
+                  formatter={(value) => [
+                    `${Number(value).toLocaleString("vi-VN")}đ`
+                  ]}
+                  contentStyle={{
+                    backgroundColor: "#111",
+                    border: "1px solid #facc15",
+                  }}
                 />
                 <Legend />
                 <Bar dataKey="bookingRevenue" name="Booking" fill="url(#colorBooking)" radius={[8, 8, 0, 0]} />
